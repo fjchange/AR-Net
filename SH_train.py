@@ -13,7 +13,7 @@ from SHTech.AR_Net import *
 def parse_args():
     parser=argparse.ArgumentParser()
     parser.add_argument('--size',type=int,default=2048)
-    parser.add_argument('--norm',type=int,default=0)
+    parser.add_argument('--norm',type=int,default=2)
     parser.add_argument('--segment_len',type=int,default=16)
     parser.add_argument('--batch_size',type=int,default=30)
     parser.add_argument('--part_num',type=int,default=260)
@@ -46,7 +46,7 @@ def train_AR_Net(args):
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
     dataset=SHT_Dataset.SH_Train_Dataset(args.part_num,args.h5_file,args.training_txt,args.norm)
     dataloader=DataLoaderX(dataset,batch_size=args.batch_size,shuffle=False,num_workers=10,drop_last=True,worker_init_fn=worker_init)
-    test_feats,test_labels,test_annos=SHT_Dataset.load_shanghaitech_test(args.testing_txt,args.test_mask_dir,args.h5_file,args.segment_len)
+    test_feats,test_labels,test_annos=SHT_Dataset.load_shanghaitech_test(args.testing_txt,args.test_mask_dir,args.h5_file,args.norm)
     model=AR_Net(args.size).cuda().train()
     optimizer=torch.optim.Adam(model.parameters(),lr=args.lr,weight_decay=0)
     bce_loss=torch.nn.BCELoss().cuda()
