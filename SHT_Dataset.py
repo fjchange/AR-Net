@@ -84,7 +84,7 @@ class SH_Train_Dataset(Dataset):
 
         return norm_feat,abnorm_feat,norm_scene,abnorm_scene,norm_len,abnorm_len
 
-def load_shanghaitech_test(txt_path,mask_dir,h5_file,segment_len):
+def load_shanghaitech_test(txt_path,mask_dir,h5_file,norm):
     lines=open(txt_path,'r').readlines()
     feats=[]
     annos = []
@@ -94,7 +94,8 @@ def load_shanghaitech_test(txt_path,mask_dir,h5_file,segment_len):
     for line in lines:
         line_split=line.strip().split(',')
         feat=h[line_split[0]+'.npy']
-
+        if norm==2:
+            feat=feat/np.linalg.norm(feat,axis=-1,keepdims=True)
         if line_split[1]=='1':
             anno_npy_path=os.path.join(mask_dir,line_split[0]+'.npy')
             anno=np.load(anno_npy_path)
