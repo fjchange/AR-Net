@@ -1,7 +1,7 @@
 # AR-Net
 Reproduction of ICME 2020 Weakly Supervised Video Anomaly Detectionn via Center-Guided Discriminative Learning.
 
-With I3D RGB+Flow features, I get better `AUC 93.7% but with 1.7% FAR`. Better AUC but Poor FAR.
+With I3D RGB+Flow features, I get better `AUC 94.0% but with 0.17% FAR`.
 
 ## 1. Feature Preparation
 1. Resize frame/flow to 224x224 and extract feature with I3D model pretrained on Kinetics-400 with 16 frames per clip.
