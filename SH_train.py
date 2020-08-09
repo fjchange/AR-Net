@@ -96,8 +96,8 @@ def train_AR_Net(args):
                     _score[:score.shape[0]]=score
                     total_labels += test_anno.tolist()
                     total_scores += _score.tolist()
-                    label_dict[test_label] = test_anno.tolist()
-                    score_dict[test_label] = _score.tolist()
+                    label_dict[test_label] += test_anno.tolist()
+                    score_dict[test_label] += _score.tolist()
                 auc = eval(total_scores, total_labels, label_dict, score_dict)
                 AUCs.append(auc)
                 if len(AUCs) >= 5:
