@@ -1,5 +1,6 @@
 # AR-Net
-Reproduction of ICME 2020 Weakly Supervised Video Anomaly Detectionn via Center-Guided Discriminative Learning.
+Unofficial Reproduction of ICME 2020 Weakly Supervised Video Anomaly Detectionn via Center-Guided Discriminative Learning.
+[Official Version](https://github.com/wanboyang/Anomaly_AR_Net_ICME_2020)
 
 The FAR in the the paper should be `False Alarm Rate in Normal Videos`.
 
