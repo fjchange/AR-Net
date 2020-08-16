@@ -62,17 +62,8 @@ class SH_Train_Dataset(Dataset):
                 begin=np.random.randint(0,feat_len-self.part_num)
                 feat=feat[begin:begin+self.part_num]
             else:
-                chosen=np.linspace(0,feat_len,self.part_num+1,dtype=int)
-                new_feats=np.empty([self.part_num,feat.shape[-1]],dtype=np.float32)
-                for i in range(self.part_num):
-                    if chosen[i]==chosen[i+1]:
-                        tmp_vect=feat[chosen[i]]
-                    else:
-                        tmp_vect=np.mean(feat[chosen[i]:chosen[i+1]],axis=0,keepdims=False)
-                    if self.norm==2:
-                        tmp_vect=tmp_vect/np.linalg.norm(tmp_vect,2,axis=-1,keepdims=True)
-                    new_feats[i]=tmp_vect
-                    feat=new_feats
+                chosen=np.sort(np.random.sample(feat_len)[:self.part_num])
+                feat=feat[chosen]
             return feat,self.part_num
 
 
